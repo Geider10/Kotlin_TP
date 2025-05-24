@@ -18,5 +18,20 @@ class SignupActivity : AppCompatActivity() {
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
+
+        fun saveData(){
+            var prefs = getSharedPreferences("user", MODE_PRIVATE)
+            with(prefs.edit()){
+                putString("name",binding.iptName.text.toString())
+                putString("email",binding.iptEmail2.text.toString())
+                putString("password",binding.iptPassword2.text.toString())
+                apply()
+            }
+        }
+        binding.btnRegistrar.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            saveData()
+        }
     }
 }

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import  android.content.Context
+import androidx.annotation.Nullable
+
 class Persistencia{
 
     public fun RegistrarPersona(context: Context,persona : Persona): Boolean {
@@ -30,5 +32,17 @@ class Persistencia{
             editor.apply()
         }
         return personaExiste
+    }
+    public fun IngresarPersona(context: Context, email: String, password: String) : Persona?{
+        val preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE)
+        val json = preferences.getString("personas",null)
+
+        val gson = Gson()
+        val listaPersonas : ArrayList<Persona>
+        val tipoLista = object : TypeToken<ArrayList<Persona>>() {}.type
+        listaPersonas = gson.fromJson(json, tipoLista)
+
+        val validarEmailPassword = listaPersonas.firstOrNull{ it.email == email && it.password == password}
+        return validarEmailPassword
     }
 }

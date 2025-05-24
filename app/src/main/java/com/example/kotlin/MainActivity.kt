@@ -21,20 +21,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-
-        fun Ingresar(){
-            val prefs = getSharedPreferences("user", MODE_PRIVATE)
-            val email = prefs.getString("email",null)
-            val password = prefs.getString("password",null)
+        fun Ingresar (){
             val iptEmail = binding.iptEmail.text.toString()
             val iptPassword = binding.iptPassword.text.toString()
-            if(email == iptEmail && password == iptPassword){
+            val persona = Persistencia().IngresarPersona(this, iptEmail, iptPassword)
+
+            if (persona != null) {
+                Toast.makeText(this, "Bienvenido ${persona.nombre}", Toast.LENGTH_LONG).show()
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
-            }
-            else {
-                Toast.makeText(this, "Datos invalidos", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this, "Email o contraseña incorrectos", Toast.LENGTH_LONG).show()
             }
         }
 

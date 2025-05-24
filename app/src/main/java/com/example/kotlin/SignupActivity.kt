@@ -20,12 +20,13 @@ class SignupActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        fun saveData(){
+        fun Registrar(){
             var iptNombre = binding.iptName.text.toString()
             var iptEmail = binding.iptEmail2.text.toString()
             var iptPassword = binding.iptPassword2.text.toString()
             val persona = Persona(iptNombre,iptEmail,iptPassword)
             val personaExiste = Persistencia().RegistrarPersona(this,persona)
+
             if (!personaExiste){
                 Toast.makeText(this, "Se registro persona", Toast.LENGTH_LONG).show()
                 val intent = Intent(this, MainActivity::class.java)
@@ -35,7 +36,7 @@ class SignupActivity : AppCompatActivity() {
             }
         }
         binding.btnRegistrar.setOnClickListener{
-            saveData()
+            Registrar()
         }
     }
 }

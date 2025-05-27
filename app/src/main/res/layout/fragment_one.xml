@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.OneFragment"
-    android:background="@color/teal_200">
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".fragments.OneFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <EditText
+        android:id="@+id/etBuscarMatricula"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="One fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:hint="Ingregar matricula"
+        android:inputType="text"
+        android:padding="12dp" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btnBuscar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Buscar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerVehiculos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>

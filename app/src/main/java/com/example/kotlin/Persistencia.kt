@@ -1,14 +1,42 @@
 package com.example.kotlin
 
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import  android.content.Context
-import androidx.annotation.Nullable
+import com.example.kotlin.Entities.Vehiculo
+import com.example.kotlin.fragments.SecondFragment
 
 class Persistencia{
+    public fun AgregarVehiculo(context: Context, vehiculo: Vehiculo){
+        val preferences = context.getSharedPreferences("user",Context.MODE_PRIVATE)
+        val editar = preferences.edit()
+        val jsonVehiculos = preferences.getString("vehiculos",null)
 
+        val gson = Gson()
+        val listaVehiculos : MutableList<Vehiculo>
+        if (jsonVehiculos != null) {
+            val tipoLista = object : TypeToken<MutableList<Vehiculo>>() {}.type
+            listaVehiculos = gson.fromJson(jsonVehiculos, tipoLista)
+        }else{
+            listaVehiculos = mutableListOf()
+        }
+
+        listaVehiculos.add(vehiculo)
+        val nuevoJson= gson.toJson(listaVehiculos)
+        editar.putString("vehiculos",nuevoJson)
+        editar.apply()
+    }
+    public fun ObtenerVehiculo(context: Context): MutableList<Vehiculo> {
+        val preferences = context.getSharedPreferences("user",Context.MODE_PRIVATE)
+        val jsonVehiculos = preferences.getString("vehiculos",null)
+
+        val gson = Gson()
+        var listaVehiculos : MutableList<Vehiculo>
+        val tipoLista = object : TypeToken<MutableList<Vehiculo>>() {}.type
+        listaVehiculos = gson.fromJson(jsonVehiculos,tipoLista)
+
+        return listaVehiculos
+    }
     public fun RegistrarPersona(context: Context,persona : Persona): Boolean {
         val preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE)
         val editor = preferences.edit()

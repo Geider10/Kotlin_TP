@@ -37,19 +37,17 @@ class SecondFragment : Fragment() {
 
             val vehiculo = Vehiculo(id,etMatricula,etModelo,etMarca,spColor)
             val persistencia = Persistencia()
-            //persistencia.AgregarVehiculo(requireContext(), vehiculo)
-            //Toast.makeText(requireContext(), "Se reporto vehiculo ✅", Toast.LENGTH_LONG).show()
-            var listaVehiculos = persistencia.ObtenerVehiculo(requireContext())
-            Toast.makeText(requireContext(), "${listaVehiculos}", Toast.LENGTH_LONG).show()
+            persistencia.AgregarVehiculo(requireContext(), vehiculo)
+            Toast.makeText(requireContext(), "Se reporto vehiculo ✅", Toast.LENGTH_LONG).show()
             ClearForm()
         }
         return binding.root
     }
     fun ClearForm(){
-        binding.etGuardarMatricula.text.clear().toString()
-        binding.etMarca.text.clear().toString()
-        binding.etModelo.text.clear().toString()
-//        binding.spColor.selectedItem.apply(0)
+        binding.etGuardarMatricula.text.clear()
+        binding.etMarca.text.clear()
+        binding.etModelo.text.clear()
+        binding.spColor.setSelection(0)
 
     }
 

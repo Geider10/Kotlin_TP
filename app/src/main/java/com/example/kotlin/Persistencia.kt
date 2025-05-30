@@ -36,55 +36,54 @@ class Persistencia{
 
         return listaVehiculos
     }
-    public fun RegistrarPersona(context: Context,persona : Persona): Boolean {
+    public fun AddUser(context: Context,persona : Persona): Boolean {
         val preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE)
-        val editor = preferences.edit()
-        val json = preferences.getString("personas",null)
+        val edit = preferences.edit()
+        val jsonPersons = preferences.getString("personas",null)
 
         val gson = Gson()
-        val listaPersonas : MutableList<Persona>
-        if(json != null){
-            // Paso 5: Definimos el tipo real que queremos recuperar (una lista de Persona)
-            val tipoLista = object : TypeToken<MutableList<Persona>>() {}.type
-            listaPersonas = gson.fromJson(json,tipoLista) // Paso 6: Convertimos el JSON a una lista de objetos Persona
+        val listPersons : MutableList<Persona>
+        if(jsonPersons != null){
+            val typeList = object : TypeToken<MutableList<Persona>>() {}.type
+            listPersons = gson.fromJson(jsonPersons,typeList)
         } else{
-            listaPersonas = mutableListOf()
+            listPersons = mutableListOf()
         }
 
-        val personaExiste = listaPersonas.any { it.email == persona.email }
-        if(!personaExiste) {
-            listaPersonas.add(persona)
-            val nuevoJson = gson.toJson(listaPersonas)
-            editor.putString("personas", nuevoJson)
-            editor.apply()
+        val existsPerson = listPersons.any { it.email == persona.email }
+        if(!existsPerson) {
+            listPersons.add(persona)
+            val nuevoJson = gson.toJson(listPersons)
+            edit.putString("personas", nuevoJson)
+            edit.apply()
         }
-        return personaExiste
+        return existsPerson
     }
     public fun GetUserByEmail(context: Context, email: String) : Persona{
         val preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE)
-        val jsonPersonas = preferences.getString("personas",null)
+        val jsonPersons = preferences.getString("personas",null)
 
         val gson = Gson()
-        val listaPersonas : List<Persona>
-        val tipoLista = object : TypeToken<List<Persona>>() {}.type
-        listaPersonas = gson.fromJson(jsonPersonas, tipoLista)
+        val listPersons : List<Persona>
+        val typeList = object : TypeToken<List<Persona>>() {}.type
+        listPersons = gson.fromJson(jsonPersons, typeList)
 
-        val existsPersona = listaPersonas.firstOrNull{ it.email == email}
+        val existsPersona = listPersons.firstOrNull{ it.email == email}
         if (existsPersona == null) throw Exception("Usuario no existe")
         return existsPersona
     }
 
     public fun GetUserById(context: Context, idPersona: String?): Persona {
         val preferences = context.getSharedPreferences("user",Context.MODE_PRIVATE)
-        val jsonPersonas = preferences.getString("personas",null)
+        val jsonPersons = preferences.getString("personas",null)
 
         val gson = Gson()
-        val listaPersonas : List<Persona>
-        val tipoLista = object : TypeToken<List<Persona>>() {}.type
-        listaPersonas = gson.fromJson(jsonPersonas,tipoLista)
+        val listPersons : List<Persona>
+        val typeList = object : TypeToken<List<Persona>>() {}.type
+        listPersons = gson.fromJson(jsonPersons,typeList)
 
-        val existsPersona  = listaPersonas.first { it.id == idPersona}
-        if (existsPersona == null) throw Exception("User no existe")
-        return  existsPersona
+        val existsPerson  = listPersons.first { it.id == idPersona}
+        if (existsPerson == null) throw Exception("User no existe")
+        return  existsPerson
     }
 }

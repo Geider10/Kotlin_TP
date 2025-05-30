@@ -31,7 +31,7 @@ class SignupActivity : AppCompatActivity() {
         var iptEmail = binding.iptEmail2.text.toString()
         var iptPassword = binding.iptPassword2.text.toString()
         val persona = Persona(id,iptNombre,iptEmail,iptPassword)
-        val personaExiste = Persistencia().RegistrarPersona(this,persona)
+        val personaExiste = Persistencia().AddUser(this,persona)
 
         if (!personaExiste){
             Toast.makeText(this, "Se registro persona", Toast.LENGTH_LONG).show()

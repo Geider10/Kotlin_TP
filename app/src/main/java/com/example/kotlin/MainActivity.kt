@@ -50,8 +50,8 @@ class MainActivity : AppCompatActivity() {
     }
     fun AutoLogin(){
         val preferences = getSharedPreferences("user", MODE_PRIVATE)
-        val idPersona = preferences.getString("token",null)
-        if(idPersona != null){
+        val idPersona = preferences.getString("token", "")
+        if(!idPersona.isNullOrEmpty()){
             NavegarHome()
         }
     }

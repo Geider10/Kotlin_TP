@@ -5,5 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileUserActivity">
-
+    <TextView
+        android:id="@+id/tvNameUserProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nombre: Usuario"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="100dp"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tvEmailUserProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameUserProfile"
+        tools:text="Email: user@email.com"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"/>
+    <Button
+        android:id="@+id/btnCerrarSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmailUserProfile"
+        android:layout_marginTop="10dp"
+        android:text="Cerrar sesion" />
 </androidx.constraintlayout.widget.ConstraintLayout>

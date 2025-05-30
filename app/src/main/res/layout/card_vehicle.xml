@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/beige">
+
+    <ImageView
+        android:id="@+id/ivImagenAuto"
+        android:layout_width="150dp"
+        android:layout_height="120dp"
+        tools:background="@color/purple_200"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <TextView
+        android:id="@+id/tvMatriculaAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Matricula"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/tvMarcaAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Marca"
+        app:layout_constraintStart_toEndOf="@+id/ivImagenAuto"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18sp"
+        android:layout_marginStart="10dp"/>
+    <TextView
+        android:id="@+id/tvModeloAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Modelo"
+        app:layout_constraintStart_toEndOf="@+id/ivImagenAuto"
+        app:layout_constraintTop_toBottomOf="@+id/tvMarcaAuto"
+        android:textSize="18sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/tvColorAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Color"
+        app:layout_constraintStart_toEndOf="@+id/ivImagenAuto"
+        app:layout_constraintTop_toBottomOf="@+id/tvModeloAuto"
+        android:textSize="18sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

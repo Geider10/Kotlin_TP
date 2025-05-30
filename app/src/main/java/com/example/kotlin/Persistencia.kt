@@ -3,6 +3,7 @@ package com.example.kotlin
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import  android.content.Context
+import com.example.kotlin.Entities.Persona
 import com.example.kotlin.Entities.Vehiculo
 
 class Persistencia{
@@ -50,7 +51,7 @@ class Persistencia{
         edit.putString("personas", nuevoJson)
         edit.apply()
     }
-    public fun GetUserByEmail(context: Context, email: String) : Persona{
+    public fun GetUserByEmail(context: Context, email: String) : Persona {
         val preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE)
         val jsonPersons = preferences.getString("personas",null)
 

@@ -17,8 +17,8 @@ class ProfileUserActivity : AppCompatActivity() {
 
         val namePerson = intent.getStringExtra("nameUser")
         val emailPerson = intent.getStringExtra("emailUser")
-        binding.tvNameUserProfile.text = namePerson
-        binding.tvEmailUserProfile.text = emailPerson
+        binding.tvNameUserProfile.text = "Nombre: " + namePerson
+        binding.tvEmailUserProfile.text ="Email: " + emailPerson
 
         binding.btnCerrarSesion.setOnClickListener { LogOut() }
     }

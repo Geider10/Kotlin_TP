@@ -11,11 +11,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.example.kotlin.Entities.Persona
 import com.example.kotlin.databinding.ActivityHomeBinding
 import com.example.kotlin.fragments.OneFragment
 import com.example.kotlin.fragments.SecondFragment
 import com.google.android.material.navigation.NavigationView
-import org.w3c.dom.Text
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.kotlin.Entities.Persona
 import com.example.kotlin.databinding.ActivitySignupBinding
 import java.util.UUID
 

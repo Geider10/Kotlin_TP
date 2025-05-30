@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import  android.content.Context
 import com.example.kotlin.Entities.Vehiculo
-import com.example.kotlin.fragments.SecondFragment
 
 class Persistencia{
     public fun AgregarVehiculo(context: Context, vehiculo: Vehiculo){
@@ -72,5 +71,19 @@ class Persistencia{
 
         val validarEmailPassword = listaPersonas.firstOrNull{ it.email == email && it.password == password}
         return validarEmailPassword
+    }
+
+    public fun GetUserById(context: Context, idPersona: String?): Persona {
+        val preferences = context.getSharedPreferences("user",Context.MODE_PRIVATE)
+        val jsonPersonas = preferences.getString("personas",null)
+
+        val gson = Gson()
+        val listaPersonas : List<Persona>
+        val tipoLista = object : TypeToken<List<Persona>>() {}.type
+        listaPersonas = gson.fromJson(jsonPersonas,tipoLista)
+
+        val existsPersona  = listaPersonas.first { it.id == idPersona}
+        //if (existsPersona == null) throw Exception("User no existe")
+        return  existsPersona
     }
 }

@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_item_one"
-        android:title="Opcion 1"
+        android:title="Vehiculos Reportados"
         android:icon="@drawable/ic_item_one"/>
 
     <item
         android:id="@+id/nav_item_two"
-        android:title="Opcion 2"
+        android:title="Agregar Reporte"
         android:icon="@drawable/ic_item_two"/>
 
     <item
         android:id="@+id/nav_item_three"
-        android:title="Opcion 3"
+        android:title="Gestionar Reportes"
         android:icon="@drawable/ic_item_three"/>
 </menu>

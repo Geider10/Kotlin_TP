@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        GetToken()
+        AutoLogin()
 
         binding.txtRegistrate.setOnClickListener {
             val intent = Intent(this,SignupActivity::class.java)
@@ -48,15 +48,15 @@ class MainActivity : AppCompatActivity() {
         editor.putString("token",idPersona)
         editor.apply()
     }
-    fun GetToken(){
+    fun AutoLogin(){
         val preferences = getSharedPreferences("user", MODE_PRIVATE)
-        val jsonPersona = preferences.getString("token",null)
-        if(jsonPersona != null){
+        val idPersona = preferences.getString("token",null)
+        if(idPersona != null){
             NavegarHome()
         }
     }
     fun NavegarHome(){
-        Toast.makeText(this, "Bienvenido", Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, "Bienvenido", Toast.LENGTH_LONG).show()
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }

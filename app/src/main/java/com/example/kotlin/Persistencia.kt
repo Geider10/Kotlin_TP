@@ -60,17 +60,18 @@ class Persistencia{
         }
         return personaExiste
     }
-    public fun IngresarPersona(context: Context, email: String, password: String) : Persona?{
+    public fun GetUserByEmail(context: Context, email: String) : Persona{
         val preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE)
-        val json = preferences.getString("personas",null)
+        val jsonPersonas = preferences.getString("personas",null)
 
         val gson = Gson()
-        val listaPersonas : ArrayList<Persona>
-        val tipoLista = object : TypeToken<ArrayList<Persona>>() {}.type
-        listaPersonas = gson.fromJson(json, tipoLista)
+        val listaPersonas : List<Persona>
+        val tipoLista = object : TypeToken<List<Persona>>() {}.type
+        listaPersonas = gson.fromJson(jsonPersonas, tipoLista)
 
-        val validarEmailPassword = listaPersonas.firstOrNull{ it.email == email && it.password == password}
-        return validarEmailPassword
+        val existsPersona = listaPersonas.firstOrNull{ it.email == email}
+        if (existsPersona == null) throw Exception("Usuario no existe")
+        return existsPersona
     }
 
     public fun GetUserById(context: Context, idPersona: String?): Persona {
@@ -83,7 +84,7 @@ class Persistencia{
         listaPersonas = gson.fromJson(jsonPersonas,tipoLista)
 
         val existsPersona  = listaPersonas.first { it.id == idPersona}
-        //if (existsPersona == null) throw Exception("User no existe")
+        if (existsPersona == null) throw Exception("User no existe")
         return  existsPersona
     }
 }

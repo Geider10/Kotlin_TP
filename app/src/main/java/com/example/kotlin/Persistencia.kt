@@ -6,24 +6,27 @@ import  android.content.Context
 import com.example.kotlin.Entities.Vehiculo
 
 class Persistencia{
-    public fun AgregarVehiculo(context: Context, vehiculo: Vehiculo){
+    public fun AddVehicle(context: Context, vehiculo: Vehiculo){
         val preferences = context.getSharedPreferences("user",Context.MODE_PRIVATE)
-        val editar = preferences.edit()
-        val jsonVehiculos = preferences.getString("vehiculos",null)
+        val edit = preferences.edit()
+        val jsonVehicles = preferences.getString("vehiculos",null)
 
         val gson = Gson()
-        val listaVehiculos : MutableList<Vehiculo>
-        if (jsonVehiculos != null) {
+        val listVehicles : MutableList<Vehiculo>
+        if (jsonVehicles != null) {
             val tipoLista = object : TypeToken<MutableList<Vehiculo>>() {}.type
-            listaVehiculos = gson.fromJson(jsonVehiculos, tipoLista)
+            listVehicles = gson.fromJson(jsonVehicles, tipoLista)
         }else{
-            listaVehiculos = mutableListOf()
+            listVehicles = mutableListOf()
         }
 
-        listaVehiculos.add(vehiculo)
-        val nuevoJson= gson.toJson(listaVehiculos)
-        editar.putString("vehiculos",nuevoJson)
-        editar.apply()
+        val existsVehicle = listVehicles.any {it.Matricula == vehiculo.Matricula}
+        if (existsVehicle) throw  Exception ("La matricula ya esta registrada")
+
+        listVehicles.add(vehiculo)
+        val updateJson= gson.toJson(listVehicles)
+        edit.putString("vehiculos",updateJson)
+        edit.apply()
     }
     public fun ObtenerVehiculo(context: Context): MutableList<Vehiculo> {
         val preferences = context.getSharedPreferences("user",Context.MODE_PRIVATE)
@@ -82,7 +85,7 @@ class Persistencia{
         val typeList = object : TypeToken<List<Persona>>() {}.type
         listPersons = gson.fromJson(jsonPersons,typeList)
 
-        val existsPerson  = listPersons.first { it.id == idPersona}
+        val existsPerson  = listPersons.firstOrNull() { it.id == idPersona}
         if (existsPerson == null) throw Exception("User no existe")
         return  existsPerson
     }

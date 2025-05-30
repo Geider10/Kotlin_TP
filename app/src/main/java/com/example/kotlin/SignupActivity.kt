@@ -31,14 +31,20 @@ class SignupActivity : AppCompatActivity() {
         var iptEmail = binding.iptEmail2.text.toString()
         var iptPassword = binding.iptPassword2.text.toString()
         val persona = Persona(id,iptNombre,iptEmail,iptPassword)
-        val personaExiste = Persistencia().AddUser(this,persona)
 
-        if (!personaExiste){
-            Toast.makeText(this, "Se registro persona", Toast.LENGTH_LONG).show()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }else{
-            Toast.makeText(this, "Ya existe este email", Toast.LENGTH_LONG).show()
+        try {
+            val personaExiste = Persistencia().AddUser(this,persona)
+
+            if (!personaExiste){
+                Toast.makeText(this, "Se registro persona", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this, "Ya existe este email", Toast.LENGTH_LONG).show()
+            }
+        }
+        catch (e : Exception){
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
         }
     }
 }

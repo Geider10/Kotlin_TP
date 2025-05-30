@@ -25,8 +25,7 @@ class SecondFragment : Fragment() {
     ): View? {
         binding = FragmentSecondBinding.inflate(inflater, container, false)
 
-        val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item, spinnerColors)
-        binding.spColor.adapter = adapter
+        LoadSpinnerAdapter()
 
         binding.btnPublicar.setOnClickListener{
             Publicar()
@@ -50,6 +49,10 @@ class SecondFragment : Fragment() {
         catch (e : Exception){
             Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
         }
+    }
+    fun LoadSpinnerAdapter(){
+        val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item, spinnerColors)
+        binding.spColor.adapter = adapter
     }
     fun ClearForm(){
         binding.etGuardarMatricula.text.clear()

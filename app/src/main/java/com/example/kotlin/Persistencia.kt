@@ -7,28 +7,6 @@ import com.example.kotlin.Entities.Persona
 import com.example.kotlin.Entities.Vehiculo
 
 class Persistencia{
-    public fun AddVehicle(context: Context, vehiculo: Vehiculo){
-        val preferences = context.getSharedPreferences("user",Context.MODE_PRIVATE)
-        val edit = preferences.edit()
-        val jsonVehicles = preferences.getString("vehiculos",null)
-
-        val gson = Gson()
-        val listVehicles : MutableList<Vehiculo>
-        if (jsonVehicles != null) {
-            val tipoLista = object : TypeToken<MutableList<Vehiculo>>() {}.type
-            listVehicles = gson.fromJson(jsonVehicles, tipoLista)
-        }else{
-            listVehicles = mutableListOf()
-        }
-
-        val existsVehicle = listVehicles.any {it.Matricula == vehiculo.Matricula}
-        if (existsVehicle) throw  Exception ("La matricula ya esta registrada")
-
-        listVehicles.add(vehiculo)
-        val updateJson= gson.toJson(listVehicles)
-        edit.putString("vehiculos",updateJson)
-        edit.apply()
-    }
     public fun AddUser(context: Context,persona : Persona){
         val preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE)
         val edit = preferences.edit()
@@ -78,15 +56,39 @@ class Persistencia{
         if (existsPerson == null) throw Exception("El id es incorrecto")
         return  existsPerson
     }
-    public fun ObtenerVehiculo(context: Context): MutableList<Vehiculo> {
+    public fun AddVehicle(context: Context, vehiculo: Vehiculo){
         val preferences = context.getSharedPreferences("user",Context.MODE_PRIVATE)
-        val jsonVehiculos = preferences.getString("vehiculos",null)
+        val edit = preferences.edit()
+        val jsonVehicles = preferences.getString("vehiculos",null)
 
         val gson = Gson()
-        var listaVehiculos : MutableList<Vehiculo>
-        val tipoLista = object : TypeToken<MutableList<Vehiculo>>() {}.type
-        listaVehiculos = gson.fromJson(jsonVehiculos,tipoLista)
+        val listVehicles : MutableList<Vehiculo>
+        if (jsonVehicles != null) {
+            val tipoLista = object : TypeToken<MutableList<Vehiculo>>() {}.type
+            listVehicles = gson.fromJson(jsonVehicles, tipoLista)
+        }else{
+            listVehicles = mutableListOf()
+        }
 
-        return listaVehiculos
+        val existsVehicle = listVehicles.any {it.Matricula == vehiculo.Matricula}
+        if (existsVehicle) throw  Exception ("La matricula ya esta registrada")
+
+        listVehicles.add(vehiculo)
+        val updateJson= gson.toJson(listVehicles)
+        edit.putString("vehiculos",updateJson)
+        edit.apply()
+    }
+    public fun GetVehicles(context: Context): List<Vehiculo> {
+        val preferences = context.getSharedPreferences("user",Context.MODE_PRIVATE)
+        val jsonVehicles = preferences.getString("vehiculos",null)
+
+        val gson = Gson()
+        var listVehicles : List<Vehiculo>
+        val typeList = object : TypeToken<MutableList<Vehiculo>>() {}.type
+        listVehicles = gson.fromJson(jsonVehicles,typeList)
+
+        if(listVehicles.size == 0) throw Exception("No hay vehiculos resportados")
+
+        return listVehicles
     }
 }

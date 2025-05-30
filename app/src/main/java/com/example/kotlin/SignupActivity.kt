@@ -33,15 +33,12 @@ class SignupActivity : AppCompatActivity() {
         val persona = Persona(id,iptNombre,iptEmail,iptPassword)
 
         try {
-            val personaExiste = Persistencia().AddUser(this,persona)
+            val persistence = Persistencia()
+            persistence.AddUser(this, persona)
+            Toast.makeText(this, "Se registro con exito", Toast.LENGTH_LONG).show()
 
-            if (!personaExiste){
-                Toast.makeText(this, "Se registro persona", Toast.LENGTH_LONG).show()
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }else{
-                Toast.makeText(this, "Ya existe este email", Toast.LENGTH_LONG).show()
-            }
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
         catch (e : Exception){
             Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()

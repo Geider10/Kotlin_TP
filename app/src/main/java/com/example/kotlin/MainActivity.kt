@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity() {
         try {
             val person = Persistencia().GetUserByEmail(this, iptEmail)
             val passwordMatched = person.password == iptPassword
-            if (!passwordMatched) return Toast.makeText(this, "Contraseña no coincide", Toast.LENGTH_LONG).show()
+            if (!passwordMatched) return Toast.makeText(this, "La contraseña es incorrecta", Toast.LENGTH_LONG).show()
+
             NavegarHome()
             CreateToken(person.id)
         }

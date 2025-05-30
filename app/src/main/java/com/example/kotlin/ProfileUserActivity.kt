@@ -15,19 +15,19 @@ class ProfileUserActivity : AppCompatActivity() {
         binding = ActivityProfileUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val namePersona = intent.getStringExtra("nameUser")
-        val emailPersona = intent.getStringExtra("emailUser")
-        binding.tvNameUserProfile.text = namePersona
-        binding.tvEmailUserProfile.text = emailPersona
+        val namePerson = intent.getStringExtra("nameUser")
+        val emailPerson = intent.getStringExtra("emailUser")
+        binding.tvNameUserProfile.text = namePerson
+        binding.tvEmailUserProfile.text = emailPerson
 
         binding.btnCerrarSesion.setOnClickListener { LogOut() }
     }
 
     fun LogOut(){
         val preferences = getSharedPreferences("user", MODE_PRIVATE)
-        val editor = preferences.edit()
-        editor.putString("token","")
-        editor.apply()
+        val edit = preferences.edit()
+        edit.putString("token","")
+        edit.apply()
 
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)

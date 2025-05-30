@@ -28,18 +28,7 @@ class Persistencia{
         edit.putString("vehiculos",updateJson)
         edit.apply()
     }
-    public fun ObtenerVehiculo(context: Context): MutableList<Vehiculo> {
-        val preferences = context.getSharedPreferences("user",Context.MODE_PRIVATE)
-        val jsonVehiculos = preferences.getString("vehiculos",null)
-
-        val gson = Gson()
-        var listaVehiculos : MutableList<Vehiculo>
-        val tipoLista = object : TypeToken<MutableList<Vehiculo>>() {}.type
-        listaVehiculos = gson.fromJson(jsonVehiculos,tipoLista)
-
-        return listaVehiculos
-    }
-    public fun AddUser(context: Context,persona : Persona): Boolean {
+    public fun AddUser(context: Context,persona : Persona){
         val preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE)
         val edit = preferences.edit()
         val jsonPersons = preferences.getString("personas",null)
@@ -54,13 +43,12 @@ class Persistencia{
         }
 
         val existsPerson = listPersons.any { it.email == persona.email }
-        if(!existsPerson) {
-            listPersons.add(persona)
-            val nuevoJson = gson.toJson(listPersons)
-            edit.putString("personas", nuevoJson)
-            edit.apply()
-        }
-        return existsPerson
+        if (existsPerson) throw Exception("El email ya esta registrado")
+
+        listPersons.add(persona)
+        val nuevoJson = gson.toJson(listPersons)
+        edit.putString("personas", nuevoJson)
+        edit.apply()
     }
     public fun GetUserByEmail(context: Context, email: String) : Persona{
         val preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE)
@@ -72,7 +60,7 @@ class Persistencia{
         listPersons = gson.fromJson(jsonPersons, typeList)
 
         val existsPersona = listPersons.firstOrNull{ it.email == email}
-        if (existsPersona == null) throw Exception("Usuario no existe")
+        if (existsPersona == null) throw Exception("El email es incorrecto")
         return existsPersona
     }
 
@@ -86,7 +74,18 @@ class Persistencia{
         listPersons = gson.fromJson(jsonPersons,typeList)
 
         val existsPerson  = listPersons.firstOrNull() { it.id == idPersona}
-        if (existsPerson == null) throw Exception("User no existe")
+        if (existsPerson == null) throw Exception("El id es incorrecto")
         return  existsPerson
+    }
+    public fun ObtenerVehiculo(context: Context): MutableList<Vehiculo> {
+        val preferences = context.getSharedPreferences("user",Context.MODE_PRIVATE)
+        val jsonVehiculos = preferences.getString("vehiculos",null)
+
+        val gson = Gson()
+        var listaVehiculos : MutableList<Vehiculo>
+        val tipoLista = object : TypeToken<MutableList<Vehiculo>>() {}.type
+        listaVehiculos = gson.fromJson(jsonVehiculos,tipoLista)
+
+        return listaVehiculos
     }
 }

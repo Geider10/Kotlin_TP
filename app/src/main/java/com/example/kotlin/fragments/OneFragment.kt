@@ -17,12 +17,7 @@ import com.example.kotlin.databinding.FragmentOneBinding
 class OneFragment : Fragment() {
 
     private  lateinit var binding: FragmentOneBinding
-    /*private val listVehicles : List<Vehiculo> = listOf(
-        Vehiculo("01", "AAAA", "Focus", "Ford", "Blanco"),
-        Vehiculo("02", "BBBB", "Duster", "Renault", "Rojo"),
-        Vehiculo("03", "CCCC", "C8", "Audi", "Negro")
-    )*/
-
+    private lateinit var listVehicles : List<Vehiculo>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,13 +25,23 @@ class OneFragment : Fragment() {
         binding = FragmentOneBinding.inflate(inflater, container, false)
 
        try{
-           val listVehicles = Persistencia().GetVehicles(requireContext())
+           listVehicles = Persistencia().GetVehicles(requireContext())
            loadRecyclerView(listVehicles)
        }
        catch (e : Exception){
            Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
        }
-
+        binding.btnBuscar.setOnClickListener {
+            val etMatricula = binding.etBuscarMatricula.text.toString()
+            if(etMatricula.isNullOrEmpty()){
+                loadRecyclerView(listVehicles)
+            }else{
+                val filterVehicles = listVehicles.filter{ it ->
+                    it.Matricula.lowercase().contains(etMatricula.trim().lowercase())
+                }
+                loadRecyclerView(filterVehicles)
+            }
+        }
         return binding.root
     }
     fun loadRecyclerView(listVehicles : List<Vehiculo>){

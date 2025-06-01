@@ -5,16 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileUserActivity">
+    <ImageView
+        android:id="@+id/imFotoPerfil"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="120dp"
+        android:src="@mipmap/ic_user"
+        />
     <TextView
         android:id="@+id/tvNameUserProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imFotoPerfil"
         tools:text="Nombre: Usuario"
-        android:layout_marginTop="270dp"
         android:layout_marginLeft="100dp"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
     <TextView
         android:id="@+id/tvEmailUserProfile"
         android:layout_width="wrap_content"
@@ -32,6 +42,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEmailUserProfile"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:text="Cerrar sesion" />
 </androidx.constraintlayout.widget.ConstraintLayout>

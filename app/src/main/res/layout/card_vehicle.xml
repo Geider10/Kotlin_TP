@@ -14,7 +14,7 @@
         android:layout_height="120dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/purple_200"
+        android:src="@mipmap/ic_car"
         />
     <TextView
         android:id="@+id/tvMatriculaAuto"

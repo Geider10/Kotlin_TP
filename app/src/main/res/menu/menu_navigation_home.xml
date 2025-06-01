@@ -10,8 +10,4 @@
         android:title="Agregar Reporte"
         android:icon="@drawable/ic_item_two"/>
 
-    <item
-        android:id="@+id/nav_item_three"
-        android:title="Gestionar Reportes"
-        android:icon="@drawable/ic_item_three"/>
 </menu>

@@ -1,5 +1,5 @@
 ## Descripción 
-Es una aplicación móvil que permite reportar vehículos robados o perdidos. El objetivo de la app es facilitar y ayudar a las personas.
+Es una aplicación móvil que permite reportar vehículos robados o perdidos. El objetivo de la app es ayudar a las personas a enconstrar su auto rapido y facil.
 
 
 ### Características 

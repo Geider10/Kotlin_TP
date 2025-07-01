@@ -1,35 +1,32 @@
 ## Descripción 
-Es una aplicación desarrollada en Kotlin (EmptyActivity) que permite reportar vehículos robados o perdidos de forma sencilla y rápida.
+Es una aplicación móvil que permite reportar vehículos robados o perdidos. El objetivo de la app es facilitar y ayudar a las personas.
 
 
 ### Características 
-
 - Reporte de vehículos robados o extraviados
 - Búsqueda de vehículos mediante filtros
 - Persistencia de datos con SharedPreferences
 
 
 ## Tecnologias
-- Kotlin
+- Kotlin + POO
 - SharedPreferences
 - Intents
-- Material Design
 - View Binding
-- POO
 
 
 ## Futuras Mejoras
 
 - Editar y eliminar vehículos reportados
 - Visualizar detalles completos del vehículo
-- Persistencia con base de datos
+- Persistencia con Room 
 - Subida y visualización de imágenes desde la app
 
 
 ## Librerias y Componente
 
 - UUID
-- Navigation Drawer (MenuDrawer)
+- Navigation Drawer 
 - Spinner
 - RecyclerView
 - Fragment
